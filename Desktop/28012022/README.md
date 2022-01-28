@@ -1,0 +1,1 @@
+Personal project for learning new techs, might turn into a portfolio, idk
