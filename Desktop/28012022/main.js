@@ -19,7 +19,7 @@ class Player {
         }
 
         this.width = 25
-        this.height = 25
+        this.height = 37.5
     }
 
     draw() {
