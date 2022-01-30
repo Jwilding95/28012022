@@ -51,9 +51,9 @@ function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     player.update()
 
-    if (keys.right.pressed) {
+    if (keys.right.pressed && !keys.left.pressed) {
         player.velocity.x = 5
-    } else if (keys.left.pressed) {
+    } else if (keys.left.pressed && !keys.right.pressed) {
         player.velocity.x = -5
     } else player.velocity.x = 0
 }
