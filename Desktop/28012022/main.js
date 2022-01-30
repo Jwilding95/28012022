@@ -43,7 +43,8 @@ class Player {
 const player = new Player
 const keys = {
     right: {pressed: false},
-    left: {pressed: false}
+    left: {pressed: false},
+    space: {pressed: false}
 }
 
 function animate() {
@@ -56,39 +57,44 @@ function animate() {
     } else if (keys.left.pressed && !keys.right.pressed) {
         player.velocity.x = -5
     } else player.velocity.x = 0
+
+    if (keys.space.pressed && player.velocity.y == 0) {
+        player.velocity.y -= 20
+    }
 }
 
 animate()
 
+// Remove Infinite Jump
 window.addEventListener('keydown', ({code}) => {
-    console.log(code)
+    console.log(`Key Down: ${code}`)
     switch (code) {
-        case 'Space': 
-            player.velocity.y -= 20
+        case 'Space':
+            keys.space.pressed = true
             break
         
         case 'KeyA':
-            console.log(code)
             keys.left.pressed = true
             break
 
         case 'KeyD':
-            console.log(code)
             keys.right.pressed = true
             break
     }
 })
 
 window.addEventListener('keyup', ({code}) => {
-    console.log(code)
+    console.log(`Key Up: ${code}`)
     switch (code) {
+        case 'Space':
+            keys.space.pressed = false
+            break
+        
         case 'KeyA':
-            console.log(code)
             keys.left.pressed = false
             break
 
         case 'KeyD':
-            console.log(code)
             keys.right.pressed = false
             break
     }
