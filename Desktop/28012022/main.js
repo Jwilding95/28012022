@@ -3,14 +3,14 @@ var ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const gravity = 0.5
+const gravity = 0.3
 
 class Player {
     constructor() {
 
         this.position = {
-            x: 100,
-            y: 100
+            x: 50,
+            y: 50
         }
 
         this.velocity = {
@@ -18,8 +18,8 @@ class Player {
             y: 0
         }
 
-        this.width = 50
-        this.height = 50
+        this.width = 25
+        this.height = 25
     }
 
     draw() {
@@ -59,13 +59,12 @@ function animate() {
     } else player.velocity.x = 0
 
     if (keys.space.pressed && player.velocity.y == 0) {
-        player.velocity.y -= 20
+        player.velocity.y -= 12
     }
 }
 
 animate()
 
-// Remove Infinite Jump
 window.addEventListener('keydown', ({code}) => {
     console.log(`Key Down: ${code}`)
     switch (code) {
