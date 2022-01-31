@@ -3,7 +3,7 @@ var ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const gravity = 0.3
+const gravity = 0.4
 
 class Player {
     constructor() {
@@ -18,8 +18,9 @@ class Player {
             y: 0
         }
 
-        this.width = 25
-        this.height = 37.5
+        // Big Mario SMW 15/28 - 0.53571428571
+        this.width = 60
+        this.height = 112
     }
 
     draw() {
@@ -40,7 +41,27 @@ class Player {
     }
 }
 
+class Platform {
+    constructor(posx, posy, w, h) {
+        this.position = {
+            x: posx,
+            y: posy
+        }
+
+        this.width = w
+        this.height = h
+    }
+
+    draw() {
+        ctx.fillStyle = 'blue'
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+}
+
 const player = new Player
+const platform1 = new Platform(300, 863, 64, 64)
+const platform2 = new Platform(300, 863-64, 64, 64)
+const platform3 = new Platform(300, 863-128, 64, 64)
 const keys = {
     right: {pressed: false},
     left: {pressed: false},
@@ -51,15 +72,18 @@ function animate() {
     requestAnimationFrame(animate)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     player.update()
+    platform1.draw()
+    platform2.draw()
+    platform3.draw()
 
     if (keys.right.pressed && !keys.left.pressed) {
-        player.velocity.x = 5
+        player.velocity.x = 7
     } else if (keys.left.pressed && !keys.right.pressed) {
-        player.velocity.x = -5
+        player.velocity.x = -7
     } else player.velocity.x = 0
 
     if (keys.space.pressed && player.velocity.y == 0) {
-        player.velocity.y -= 12
+        player.velocity.y -= 15
     }
 }
 
